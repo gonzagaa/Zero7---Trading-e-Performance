@@ -1,0 +1,316 @@
+#home {
+    background: var(--bg-black);
+    height: auto;
+    overflow: hidden;
+  
+    position: relative;
+  
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+  
+    transition: all 200ms ease-in-out;
+
+    padding-top: 70%;
+    padding-bottom: 15%;
+  }
+
+  #home .wrapper {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+  }
+  
+  #home .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    gap: 5rem;
+  }
+
+  #home .text {
+    margin-top: 10%;
+    text-align: center;
+    z-index: 4;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  #home img.logo {
+    width: 13rem;
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  #home h1 {
+    color: #ffffff;
+    font-size: 1.8rem;
+  
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  #home p {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  #home a {
+    width: 100%;
+  }
+
+  #home .image img {
+    width: 100%;
+  }
+  
+  #home .image img.mobile {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: auto;
+    max-width: 100vw;
+    height: auto;
+  }
+  
+  #home .image img.desktop {
+    display: none;
+  }
+
+  #home .head {
+    width: 100%;
+  }
+
+  /* eyebrow da campanha */
+  #home .head h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    letter-spacing: .12rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: fit-content;
+    margin-inline: auto;
+    padding: .9rem 1.8rem;
+    border-radius: 99rem;
+
+    background: linear-gradient(135deg, rgba(29, 164, 243, .14), rgba(2, 60, 131, .10));
+    border: 1px solid rgba(29, 164, 243, .30);
+    box-shadow: 0 0 26px rgba(29, 164, 243, .16);
+  }
+
+  /* faixa de informações do evento */
+  #home .evento {
+    position: relative;
+    z-index: 3;
+
+    margin-top: 3rem;
+  }
+
+  #home .evento ul {
+    display: grid;
+    gap: 1rem;
+  }
+
+  #home .evento li {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    text-align: left;
+
+    padding: 1.2rem 1.8rem;
+    border-radius: 1rem;
+
+    background: linear-gradient(135deg, rgba(29, 164, 243, .14), rgba(2, 60, 131, .10));
+    border: 1px solid rgba(29, 164, 243, .22);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+  }
+
+  #home .evento .rotulo {
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: .08rem;
+    color: var(--z7-sky);
+  }
+
+  #home .evento .valor {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  /* tablet: 2 colunas na faixa do evento */
+  @media (min-width: 768px) and (max-width: 1079px) {
+    #home .evento ul {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.6rem;
+    }
+
+    #home .evento li:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1080px) {
+    header#home {
+      justify-content: center;
+      position: relative;
+      height: 100vh;
+      max-height: 100vh;
+      padding-block: 0;
+  
+      /* mask-image: linear-gradient(to bottom, #000 80%, transparent)  */
+    }
+
+    header#home.v2 {
+      padding-top: 0;
+    }
+  
+    header#home .head {
+      width: 100%;
+    }
+
+    header#home .head h3 {
+      margin-bottom: 0;
+      width: fit-content;
+      margin-inline: 0;
+      font-size: 1.3rem;
+    }
+
+    /* faixa do evento ancorada na base do hero */
+    header#home .evento {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4rem;
+
+      margin-top: 0;
+    }
+
+    header#home .evento ul {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.6rem;
+    }
+
+    header#home .evento li {
+      padding: 1.4rem 2rem;
+    }
+
+    header#home .image img.mobile {
+      display: none;
+    }
+  
+    header#home .image img.desktop {
+      display: inherit;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      right:0;
+      height: 100%;
+      object-fit: cover;
+      mask-image: linear-gradient(to bottom, #000 80%, transparent);
+    }
+
+    /* overlay preto da esquerda pra direita p/ contraste do texto */
+    header#home::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+
+      background: linear-gradient(to right,
+        rgba(0, 0, 0, .88) 0%,
+        rgba(0, 0, 0, .60) 28%,
+        rgba(0, 0, 0, .25) 48%,
+        rgba(0, 0, 0, 0) 68%);
+    }
+  
+  
+    header#home .content {
+      text-align: center;
+      align-items: center;
+  
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    header#home .text {
+      margin-top: initial;
+      margin-bottom: initial;
+      width: 100%;
+
+      text-align: left;
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+  
+      position: relative;
+      z-index: 2;
+
+      margin-top: -10%;
+    }
+
+    header#home .content .head {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      margin-bottom: 2rem;
+    }
+
+    header#home .content img.logo {
+      position: initial;
+      transform: initial;
+      width: 18rem;
+      height: auto;
+    }
+
+    header#home .content h1 {
+      font-size: 4rem;
+      width: 100%;
+      line-height: 1.1;
+      color: #f8fffd;
+      margin-bottom: 0;
+
+      margin-top: 0;
+    }
+
+    header#home .content a {
+      width: initial;
+    }
+
+    header#home .content p {
+      color: #fff;
+      font-weight: 500;
+      margin-top: 1rem;
+
+      width: 85%;
+    }
+  }
+
+  @media (min-width: 1700px) {
+    header#home .content h1 {
+      font-size: 4.5rem;
+    }
+  }

@@ -1,0 +1,97 @@
+#mentores {
+    position: relative;
+    overflow: hidden;
+}
+
+#mentores .cards {
+    display: grid;
+    gap: 2rem;
+}
+
+#mentores .card {
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(135deg, rgba(29, 164, 243, .07), rgba(2, 60, 131, .04));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.6rem;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    transition: all 500ms ease-in-out;
+}
+
+#mentores .card:hover {
+    border-color: rgba(29, 165, 243, .47);
+    box-shadow: 0 0 4rem rgba(2, 60, 131, .35);
+}
+
+/* filete de gradiente no topo do card */
+#mentores .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient);
+    opacity: .6;
+}
+
+/* moldura da foto (placeholder até a arte final) */
+#mentores .card .foto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 1.2rem;
+
+    display: grid;
+    place-items: center;
+
+    background: linear-gradient(160deg, rgba(29, 164, 243, .14), rgba(2, 60, 131, .06));
+    border: 1px solid rgba(29, 164, 243, .28);
+    box-shadow: inset 0 0 6rem rgba(2, 60, 131, .35);
+
+    transition: all 500ms ease-in-out;
+}
+
+#mentores .card:hover .foto {
+    border-color: rgba(29, 165, 243, .55);
+}
+
+#mentores .card .foto ion-icon {
+    font-size: 6rem;
+    color: rgba(255, 255, 255, .28);
+}
+
+#mentores .card .foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.2rem;
+}
+
+#mentores .card h3 {
+    color: #ffffff;
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+@media (min-width: 1080px) {
+    #mentores .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #mentores .card {
+        padding: 2.4rem;
+    }
+
+    #mentores .card h3 {
+        font-size: 2rem;
+    }
+}

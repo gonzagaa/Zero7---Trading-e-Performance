@@ -1,0 +1,122 @@
+#obrigado {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#obrigado img.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+#obrigado img.bg.desktop {
+    display: none;
+}
+
+#obrigado .content,
+#obrigado .wrapper {
+    height: 100%;
+}
+
+#obrigado header {
+    position: relative;
+    z-index: 2;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: -15%;
+}
+
+#obrigado img.logo {
+    width: 14rem;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+#obrigado header h2 {
+    color: #Fff;
+    font-size: 1.8rem;
+
+    margin-top: 3rem;
+    margin-bottom: .5rem;
+}
+
+#obrigado header p {
+    color: var(--z7-blue-soft);
+    font-size: 1.4rem;
+
+    margin-bottom: 2rem;
+}
+
+#obrigado header a {
+    width: 100%;
+}
+
+#obrigado h3 {
+    color: #ffffff;
+    font-size: 2rem;
+  
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    font-weight: 500;
+
+    margin-bottom: 2rem;
+}
+
+#obrigado h3 span {
+    font-family: var(--ncs);
+    background: linear-gradient(45deg, #1da4f3, #056ba6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 1080px) {
+    section#obrigado .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    section#obrigado header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: -2%;
+
+        width: 50%;
+    }
+
+    section#obrigado header h2 {
+        font-size: 3rem;
+        margin-top: 3rem;
+        margin-bottom: .5rem;
+    }
+    
+    section#obrigado header p {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+    
+    section#obrigado header a {
+        width: initial;
+    }
+
+    section#obrigado img.bg.desktop {
+        display: inherit;
+    }
+
+    section#obrigado img.bg.mobile {
+        display: none;
+    }
+}
