@@ -42,36 +42,51 @@
     opacity: .6;
 }
 
-/* moldura da foto (placeholder até a arte final) */
+/* moldura da foto do mentor */
 #mentores .card .foto {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    border-radius: 1.2rem;
+    position: relative;
+    overflow: hidden;
 
-    display: grid;
-    place-items: center;
+    width: 100%;
+    /* recorta a sobra branca das laterais mantendo folga: as pessoas ocupam
+       de 968 a 1976 no quadro original de 2752px, e este corte central
+       preserva 1296px (~40px de folga no mais largo) */
+    aspect-ratio: 27 / 32;
+    border-radius: 1.2rem;
 
     background: linear-gradient(160deg, rgba(29, 164, 243, .14), rgba(2, 60, 131, .06));
     border: 1px solid rgba(29, 164, 243, .28);
-    box-shadow: inset 0 0 6rem rgba(2, 60, 131, .35);
 
     transition: all 500ms ease-in-out;
 }
 
 #mentores .card:hover .foto {
     border-color: rgba(29, 165, 243, .55);
-}
-
-#mentores .card .foto ion-icon {
-    font-size: 6rem;
-    color: rgba(255, 255, 255, .28);
+    box-shadow: 0 0 3.2rem rgba(29, 164, 243, .28);
 }
 
 #mentores .card .foto img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1.2rem;
+    object-position: center;
+
+    transition: transform 500ms ease-in-out;
+}
+
+#mentores .card:hover .foto img {
+    transform: scale(1.06);
+}
+
+/* véu azul sutil por cima da foto, para amarrar as três com a paleta da LP */
+#mentores .card .foto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: linear-gradient(to top, rgba(2, 60, 131, .35), transparent 60%);
 }
 
 #mentores .card h3 {
