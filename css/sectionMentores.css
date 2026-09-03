@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.6rem;
 
     transition: all 500ms ease-in-out;
 }
@@ -97,6 +97,20 @@
     font-size: 1.8rem;
 }
 
+#mentores .card .info {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+#mentores .card p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 300;
+    color: var(--z7-blue-soft);
+    opacity: .75;
+}
+
 @media (min-width: 1080px) {
     #mentores .cards {
         grid-template-columns: repeat(3, 1fr);
@@ -108,5 +122,9 @@
 
     #mentores .card h3 {
         font-size: 2rem;
+    }
+
+    #mentores .card p {
+        font-size: 1.5rem;
     }
 }
