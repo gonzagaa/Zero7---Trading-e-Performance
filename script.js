@@ -41,3 +41,29 @@ document.querySelectorAll(".z7-btnx").forEach((btn) => {
 
 
 
+
+// VSL: só carrega o YouTube depois do clique (mantém a home leve)
+document.querySelectorAll("#vsl .capa").forEach((capa) => {
+  capa.addEventListener("click", () => {
+    const id = capa.dataset.video;
+    if (!id) return;
+
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      "https://www.youtube.com/embed/" +
+      id +
+      "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+    iframe.title = "Zero7 Trading e Performance";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+
+    // o iframe entra dentro de um slot div: a geometria 9/16 fica no slot,
+    // porque aspect-ratio + width:auto não resolve igual em elemento substituído
+    const slot = document.createElement("div");
+    slot.className = "video";
+    slot.appendChild(iframe);
+
+    capa.replaceWith(slot);
+  });
+});

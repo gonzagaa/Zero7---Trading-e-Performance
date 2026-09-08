@@ -1,12 +1,13 @@
-@import './global.css?v=21';
-@import './home.css?v=21';
-@import './sectionPilares.css?v=21';
-@import './sectionMentores.css?v=21';
-@import './sectionSobre.css?v=21';
-@import './footer.css?v=21';
+@import './global.css?v=25';
+@import './home.css?v=25';
+@import './sectionVsl.css?v=25';
+@import './sectionPilares.css?v=25';
+@import './sectionMentores.css?v=25';
+@import './sectionSobre.css?v=25';
+@import './footer.css?v=25';
 
-@import './button.css?v=21';
-@import './z7-button.css?v=21';
-@import './obrigado.css?v=21';
-@import './head.css?v=21';
-@import './barraCarregamento.css?v=21';
+@import './button.css?v=25';
+@import './z7-button.css?v=25';
+@import './obrigado.css?v=25';
+@import './head.css?v=25';
+@import './barraCarregamento.css?v=25';
