@@ -58,12 +58,6 @@ document.querySelectorAll("#vsl .capa").forEach((capa) => {
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
 
-    // o iframe entra dentro de um slot div: a geometria 9/16 fica no slot,
-    // porque aspect-ratio + width:auto não resolve igual em elemento substituído
-    const slot = document.createElement("div");
-    slot.className = "video";
-    slot.appendChild(iframe);
-
-    capa.replaceWith(slot);
+    capa.replaceWith(iframe);
   });
 });
