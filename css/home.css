@@ -202,6 +202,38 @@
     line-height: 1.2;
   }
 
+  /* as duas turmas dividem o card de datas */
+  #home .evento .turmas {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+
+  /* o rótulo e a data andam juntos; em card estreito a data
+     inteira desce para a linha de baixo, nunca quebra no meio */
+  #home .evento .turma {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .2rem .8rem;
+
+    font-size: 1.6rem;
+  }
+
+  #home .evento .turma .data {
+    white-space: nowrap;
+  }
+
+  #home .evento .turma .nome {
+    flex-shrink: 0;
+
+    font-family: var(--ncs);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: .1rem;
+    color: var(--z7-sky);
+  }
+
   /* tablet: 2 colunas na faixa do evento */
   @media (min-width: 768px) and (max-width: 1079px) {
     #home .evento ul {
