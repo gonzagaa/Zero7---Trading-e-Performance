@@ -130,22 +130,32 @@
     margin-top: 3.5rem;
   }
 
-  /* ===== Base do ingresso ===== */
+  /* ===== Base do ingresso =====
+     é um <section>, então zera o padding-block global (section
+     { padding-block: 7rem }) — essa era a causa dos ~7rem de vão
+     acima/abaixo do conteúdo. Altura = conteúdo, sem padding
+     no contêiner (brief 2a). */
   .ingresso {
-    --picote-r: 1.4rem;   /* raio do furo (~14px → ~28px de diâmetro) */
-    --picote-x: 42%;      /* posição do picote no desktop */
-    --picote-y: 50%;      /* posição do picote no mobile/tablet */
-    --corner: 2.4rem 0;   /* canto assimétrico mobile */
+    --picote-r: 1.4rem;      /* raio do furo (~14px → ~28px de diâmetro) */
+    --picote-x: 42%;         /* posição do picote no desktop */
+    --picote-y: 50%;         /* posição do picote no mobile/tablet */
+    --corner: 2.4rem 0;      /* canto assimétrico mobile */
+    --corner-size: 2.4rem;   /* valor escalar do canto, p/ sincronizar com canhoto */
+    --picote-gap: 2.6rem;    /* espaço livre em cada ponta do tracejado */
+    --divisoria: rgba(255, 255, 255, 0.08);
+    --pt: 2.4rem;            /* top do canhoto + topo das células da 1ª linha */
 
     position: relative;
     overflow: hidden;
+
+    padding: 0;
 
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto 1fr;
 
-    background: var(--bg-black);
-    border: 1px solid var(--line);
+    background: #07111B;
+    border: 1px solid rgba(255, 255, 255, 0.11);
     border-radius: var(--corner);
     text-align: left;
 
@@ -170,20 +180,56 @@
     -webkit-mask-composite: source-in;
   }
 
+  /* ===== Fundo animado — luz azul difusa por baixo do texto =====
+     Elipses mais largas que altas no mobile (ingresso vertical).
+     Só transform anima — nada de background-position, filter ou
+     opacidade (que repintam a cada quadro). */
+  .ingresso__luz {
+    position: absolute;
+    inset: -40%;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+      radial-gradient(42% 30% at 30% 26%, rgba(0, 128, 201, 0.32), transparent 70%),
+      radial-gradient(40% 28% at 70% 72%, rgba(22, 78, 160, 0.24), transparent 70%),
+      radial-gradient(34% 22% at 55% 50%, rgba(77, 178, 238, 0.10), transparent 70%);
+
+    animation: ingresso-luz 22s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes ingresso-luz {
+    0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg); }
+    50%  { transform: translate3d(5%, 3%, 0) rotate(8deg); }
+    100% { transform: translate3d(-2%, 6%, 0) rotate(-6deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ingresso__luz { animation: none; }
+  }
+
   /* ===== Canhoto (DATAS) ===== */
   .ingresso__canhoto {
     grid-row: 1;
     position: relative;
+    z-index: 1;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    padding: 2rem 2rem 2.4rem;
+    /* canhoto encosta no topo, base e esquerda do ingresso.
+       Mobile usa valores menores; desktop recebe os 4/4.8/4.2
+       do brief via override. var(--pt) é compartilhada com o
+       padding-top das células de topo da grade para o rótulo
+       de LOCAL/DURAÇÃO alinhar com DATAS. */
+    padding: var(--pt) 2rem 2.2rem;
+    background: rgba(110, 160, 220, 0.05);
 
-    background: var(--surface-raised);
-    /* filete 2px da marca no topo — acompanha o canto por conta
-       do overflow:hidden + border-radius do ingresso */
+    /* mesmo raio do ingresso no canto topo-esquerdo, para o
+       filete acompanhar a curva em vez de ser linha reta */
+    border-top-left-radius: var(--corner-size);
     box-shadow: inset 0 2px 0 var(--primary-color);
   }
 
@@ -261,42 +307,47 @@
   /* ===== Picote (linha + preparo pros furos) ===== */
   .ingresso__picote {
     grid-row: 2;
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     height: 2rem;
-    padding: 0 2rem;
+    /* dashed visível de ponta a ponta MENOS 2.6rem em cada lado */
+    padding: 0 var(--picote-gap);
   }
 
   .ingresso__picote::before {
     content: '';
     display: block;
     width: 100%;
-    border-top: 1.5px dashed rgba(242, 255, 251, 0.2);
+    border-top: 1.5px dashed rgba(255, 255, 255, 0.2);
   }
 
   /* ===== Grade (4 itens) ===== */
   .ingresso__grade {
     grid-row: 3;
-    padding: 2rem;
+    position: relative;
+    z-index: 1;
   }
 
   .ingresso__grade > dl {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0;
     margin: 0;
   }
 
   .ingresso__grade > dl > div {
-    padding: 1.2rem;
+    padding: 2rem 2rem;
   }
 
-  /* linhas finas entre células — 2x2 padrão (mobile e desktop) */
-  .ingresso__grade > dl > div:not(:nth-child(2n)) {
-    border-right: 1px solid var(--line);
+  /* linhas finas entre células — col-2 recebe border-left,
+     row-2 recebe border-top (brief 2e). */
+  .ingresso__grade > dl > div:nth-child(2n) {
+    border-left: 1px solid var(--divisoria);
   }
-  .ingresso__grade > dl > div:not(:nth-last-child(-n+2)) {
-    border-bottom: 1px solid var(--line);
+  .ingresso__grade > dl > div:nth-child(n+3) {
+    border-top: 1px solid var(--divisoria);
   }
 
   .ingresso__grade dt {
@@ -355,17 +406,21 @@
     header#home {
       justify-content: center;
       position: relative;
-      height: 100vh;
-      max-height: 100vh;
-      padding-block: 0;
-  
-      /* mask-image: linear-gradient(to bottom, #000 80%, transparent)  */
+      /* o herói mostra TODO o conteúdo em qualquer altura:
+         min-height no lugar de height fixo pra não cortar texto
+         quando o ingresso (~32rem) entra em fluxo depois.
+         height: auto deixa o herói crescer se o conteúdo passar
+         de 100vh, sem clipping. */
+      min-height: 100vh;
+      height: auto;
+      max-height: none;
+      padding-block: 2rem 4rem;
     }
 
     header#home.v2 {
       padding-top: 0;
     }
-  
+
     header#home .head {
       width: 100%;
     }
@@ -377,22 +432,37 @@
       font-size: 1.3rem;
     }
 
-    /* faixa do evento ancorada na base do hero */
+    /* ingresso entra em fluxo, logo após o wrapper do herói;
+       nada de absolute. */
     header#home .evento {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 4rem;
-
+      position: static;
+      left: auto;
+      right: auto;
+      bottom: auto;
       margin-top: 0;
     }
 
-    /* ingresso vira HORIZONTAL: canhoto ~42% / picote vertical / grade 2x2 */
+    /* ingresso vira HORIZONTAL numa linha só:
+       canhoto 42% / picote 0px no meio / grade 1fr.
+       Sem min-height, height ou padding no contêiner —
+       altura = conteúdo. */
+    /* fundo animado desktop: elipses um pouco mais altas, por conta
+       do ingresso horizontal (variação do brief parte 3). */
+    header#home .ingresso__luz {
+      background:
+        radial-gradient(38% 42% at 28% 34%, rgba(0, 128, 201, 0.32), transparent 70%),
+        radial-gradient(34% 40% at 72% 70%, rgba(22, 78, 160, 0.24), transparent 70%),
+        radial-gradient(30% 30% at 50% 12%, rgba(77, 178, 238, 0.10), transparent 70%);
+    }
+
     header#home .ingresso {
       --corner: 2.8rem 0;
+      --corner-size: 2.8rem;
+      --pt: 4rem;
 
-      grid-template-columns: var(--picote-x) 1fr;
-      grid-template-rows: 1fr;
+      grid-template-columns: 42% auto 1fr;
+      grid-template-rows: auto;
+      align-items: stretch;
 
       mask-image:
         radial-gradient(circle var(--picote-r) at var(--picote-x) 0,
@@ -413,7 +483,20 @@
     header#home .ingresso__canhoto {
       grid-row: 1;
       grid-column: 1;
-      padding: 2.4rem 2.6rem 2.6rem 2.8rem;
+      /* no desktop canhoto fica top-align — assim o topo de
+         "DATAS:" senta no mesmo Y do topo de LOCAL/DURAÇÃO */
+      justify-content: start;
+      /* canhoto desktop: 4 / 4.8 / 4.2 do brief */
+      padding: var(--pt) 4.8rem 4.2rem;
+    }
+
+    header#home .ingresso__grade > dl > div {
+      /* células desktop: 3.6rem 4rem do brief */
+      padding: 3.6rem 4rem;
+    }
+
+    header#home .ingresso__grade > dl > div:nth-child(-n+2) {
+      padding-top: var(--pt);
     }
 
     /* data herói ~42px no desktop */
@@ -421,34 +504,40 @@
       font-size: 4.2rem;
     }
 
-    /* picote vira linha vertical absoluta na borda da coluna 1 */
+    /* picote agora é item de grid na coluna 2 (auto, 0px de largura);
+       o ::before desenha a linha vertical no boundary col1/col3 */
     header#home .ingresso__picote {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: var(--picote-x);
+      grid-row: 1;
+      grid-column: 2;
+      position: relative;
       width: 0;
       height: auto;
-      padding: 2rem 0;
+      padding: 0;
+      display: block;
     }
 
     header#home .ingresso__picote::before {
+      position: absolute;
+      top: var(--picote-gap);
+      bottom: var(--picote-gap);
+      left: 0;
       width: 0;
-      height: 100%;
+      height: auto;
       border-top: 0;
-      border-left: 1.5px dashed rgba(242, 255, 251, 0.2);
+      border-left: 1.5px dashed rgba(255, 255, 255, 0.2);
     }
 
     header#home .ingresso__grade {
       grid-row: 1;
-      grid-column: 2;
-      padding: 2.4rem 2.8rem 2.4rem 2.4rem;
+      grid-column: 3;
+      padding: 0;
     }
 
+    /* grade estica altura inteira e vira 2x2 com minmax(0,1fr) */
     header#home .ingresso__grade > dl {
       height: 100%;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
     }
 
     header#home .ingresso__grade dd {

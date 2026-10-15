@@ -61,3 +61,24 @@ document.querySelectorAll("#vsl .capa").forEach((capa) => {
     capa.replaceWith(iframe);
   });
 });
+
+
+// Ingresso: pausa a animação do fundo de luz quando sai do viewport
+// (nada de pintar quadro fora da tela). Fallback: fica rodando.
+(function pauseIngressoLuzWhenOffscreen() {
+  if (!("IntersectionObserver" in window)) return;
+
+  const ingresso = document.querySelector(".ingresso");
+  const luz = ingresso && ingresso.querySelector(".ingresso__luz");
+  if (!luz) return;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        luz.style.animationPlayState = e.isIntersecting ? "running" : "paused";
+      });
+    },
+    { threshold: 0 }
+  );
+  io.observe(ingresso);
+})();
