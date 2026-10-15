@@ -127,14 +127,18 @@
     position: relative;
     z-index: 3;
 
-    margin-top: 3.5rem;
+    /* espaço entre o fim do botão do herói e o topo do ingresso:
+       <768 → 4.8rem, 768–1079 → 6.4rem, ≥1080 → 8rem */
+    margin-top: 4.8rem;
   }
 
   /* ===== Base do ingresso =====
      é um <section>, então zera o padding-block global (section
      { padding-block: 7rem }) — essa era a causa dos ~7rem de vão
      acima/abaixo do conteúdo. Altura = conteúdo, sem padding
-     no contêiner (brief 2a). */
+     no contêiner (brief 2a). A largura casa com o conteúdo do
+     wrapper do herói via herança (ingresso é filho direto de
+     .wrapper, então ocupa 100% da área de conteúdo). */
   .ingresso {
     --picote-r: 1.4rem;      /* raio do furo (~14px → ~28px de diâmetro) */
     --picote-x: 42%;         /* posição do picote no desktop */
@@ -149,6 +153,8 @@
     overflow: hidden;
 
     padding: 0;
+    width: 100%;
+    max-width: none;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -283,7 +289,8 @@
     letter-spacing: .14em;
     line-height: 1;
     text-transform: uppercase;
-    color: var(--z7-sky);
+    /* variação clara da marca: ~6,1:1 no ponto mais claro da luz */
+    color: var(--z7-sky-text);
   }
 
   /* data da turma: número herói, tabular, sem quebra;
@@ -385,6 +392,10 @@
      para evitar espaço morto; --picote-y recalibrado pela razão
      altura-canhoto/altura-total típica (~65%). */
   @media (min-width: 768px) and (max-width: 1079px) {
+    #home .evento {
+      margin-top: 6.4rem;
+    }
+
     .ingresso {
       --picote-y: 65%;
       grid-template-rows: auto auto auto;
@@ -410,11 +421,14 @@
          min-height no lugar de height fixo pra não cortar texto
          quando o ingresso (~32rem) entra em fluxo depois.
          height: auto deixa o herói crescer se o conteúdo passar
-         de 100vh, sem clipping. */
+         de 100vh, sem clipping.
+         padding-top: 8rem ancora o topo — a margem -10% do
+         .text não consegue mais puxar o selo pra fora do
+         #home em viewports curtos (ex. 1280×720). */
       min-height: 100vh;
       height: auto;
       max-height: none;
-      padding-block: 2rem 4rem;
+      padding-block: 8rem 4rem;
     }
 
     header#home.v2 {
@@ -433,13 +447,14 @@
     }
 
     /* ingresso entra em fluxo, logo após o wrapper do herói;
-       nada de absolute. */
+       nada de absolute. 8rem de espaço entre o fim do botão
+       do herói e o topo do ingresso. */
     header#home .evento {
       position: static;
       left: auto;
       right: auto;
       bottom: auto;
-      margin-top: 0;
+      margin-top: 8rem;
     }
 
     /* ingresso vira HORIZONTAL numa linha só:

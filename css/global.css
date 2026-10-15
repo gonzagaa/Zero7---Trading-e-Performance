@@ -25,6 +25,10 @@
   --z7-deep: #023c83;
   --z7-sky: #1da4f3;
   --z7-blue-soft: #d1e0ff;
+  /* variação clara da marca p/ texto pequeno sobre superfície
+     escura — contraste ~6,1:1 no ponto mais claro da luz azul
+     animada do ingresso (TURMA 01/02). */
+  --z7-sky-text: #4ec1ff;
 
   /* superfície elevada (um tom acima do bg) e linha/texto secundário —
      introduzidos para a dobra do ingresso. valores: #0a1322 opaco,
