@@ -26,6 +26,13 @@
   --z7-sky: #1da4f3;
   --z7-blue-soft: #d1e0ff;
 
+  /* superfície elevada (um tom acima do bg) e linha/texto secundário —
+     introduzidos para a dobra do ingresso. valores: #0a1322 opaco,
+     branco-marca a 8% e a 62% (contraste ~7.7:1 em texto normal). */
+  --surface-raised: #0a1322;
+  --line: rgba(242, 255, 251, 0.08);
+  --color-text-secondary: rgba(242, 255, 251, 0.62);
+
   --nav-height: 7.2rem;
 
   --ncs: 'NCS Radhiumz', sans-serif;
