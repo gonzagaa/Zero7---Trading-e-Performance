@@ -422,13 +422,15 @@
          quando o ingresso (~32rem) entra em fluxo depois.
          height: auto deixa o herói crescer se o conteúdo passar
          de 100vh, sem clipping.
-         padding-top: 8rem ancora o topo — a margem -10% do
-         .text não consegue mais puxar o selo pra fora do
-         #home em viewports curtos (ex. 1280×720). */
+         padding-top: 20rem empurra o conteúdo do herói pra baixo
+         (em justify-content:center cada +1rem só desce ~.5rem,
+         por isso o valor é grande). Também ancora o topo pra
+         margem -10% do .text não puxar o selo pra fora do #home
+         em viewports curtos (ex. 1280×720). */
       min-height: 100vh;
       height: auto;
       max-height: none;
-      padding-block: 8rem 4rem;
+      padding-block: 20rem 4rem;
     }
 
     header#home.v2 {
@@ -447,14 +449,14 @@
     }
 
     /* ingresso entra em fluxo, logo após o wrapper do herói;
-       nada de absolute. 8rem de espaço entre o fim do botão
+       nada de absolute. 14rem de espaço entre o fim do botão
        do herói e o topo do ingresso. */
     header#home .evento {
       position: static;
       left: auto;
       right: auto;
       bottom: auto;
-      margin-top: 8rem;
+      margin-top: 14rem;
     }
 
     /* ingresso vira HORIZONTAL numa linha só:
